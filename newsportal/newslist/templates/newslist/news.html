@@ -1,0 +1,26 @@
+<!--  наследуемся от шаблона default.html, который мы создавали -->
+{% extends 'newslist/default.html' %}
+
+{% load censor %}
+
+<!-- Название у нас будет News -->
+{% block title %}
+News
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим саму новость, идентификатор которой был передан в url -->
+{% block content %}
+<h1>{{ news }}</h1>
+
+    <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#"> Автор: {{ news.author }}, </a>
+              <small class="text-muted">дата публикации: {{ news.date_posted|date:"d.m.Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ post.title|censor_w }}</a></h2>
+            <p class="article-content">{{ news.content|censor_w }}</p>
+
+          </div>
+    </article>
+{% endblock content %}
